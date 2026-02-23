@@ -51,7 +51,7 @@ local Conversions = Cryptography.Utils.Conversions
 
 ------------------------------------------------------------------------
 
-## API Documentation
+## Documentation
 
 ### AES (GCM)
 
