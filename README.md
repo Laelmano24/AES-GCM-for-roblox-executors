@@ -1,215 +1,158 @@
-# Luau Cryptography
+# AES-GCM for Roblox Executor
 
-<p align="center">
-	<a href="https://xoifaii.github.io/"><img src="https://img.shields.io/badge/Docs-xoifaii.github.io-00d4aa" alt="Docs"></a>
-	<a href="https://discord.gg/Fg3sM8qKPp"><img src="https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
-	<a href="https://wally.run/package/daily3014/cryptography"><img src="https://img.shields.io/badge/Wally-Package-orange" alt="Wally"></a>
-	<a href="https://pesde.dev/packages/daily3014/cryptography"><img src="https://img.shields.io/badge/Pesde-Package-blue" alt="Pesde"></a>
+## Overview
+
+<p>
+This is a simplified AES-GCM implementation designed specifically for
+Roblox executors and Lune environments.\
+This pertains to the AES functionality of <a href="https://github.com/daily3014/rbx-cryptography" >rbx-cryptography</a>, but trimmed down to only include the necessary parts
+required for AES usage in scripts.
+
+Do not expect a full cryptography suite.\
+This module focuses on practicality, portability, and ease of
+integration in executor-based environments.
 </p>
 
-**Luau Cryptography** is a library of cryptographic algorithims written in Luau. It supports Post-Quantum (PQ), Elliptic Curve Cryptography (ECC), authenticated encryption and CSPRNG with many utilities.
+------------------------------------------------------------------------
 
-## Authors
+## Why This Module?
 
-**daily3014** - Developer - [@daily3014](https://github.com/daily3014)  
-**Xoifail** - Developer - [@xoifail](https://github.com/xoifaii)
+This project extracts only the essential components and packages them
+into a single, lightweight module that can be easily used in:
 
-### Acknowledgments
+-   Roblox (executors environment)
+-   Lune environment
 
-- Thanks to those who gave feedback and testing
-- Special thanks to all contributors and bug reporters
-- AES was originally made by @RobloxGamerPro200007
-- XChaCha20 was originally made by @littleBitsman
-- Murmur3 hash was originally made by @kohltastrophe
-
-## Disclaimer
-
-While this library has extensive testing, it's always recommended that you do your own tests. Keep in mind that there may be timing vulnerabilities that cannot be fixed due to how Luau compiles functions. **This library is NOT intended for exploitation, harassment, illegal activities, or explicit content.** All security issues should be reported in the Discord server.
-
-## Documentation
-
-[![Docs](https://img.shields.io/badge/Docs-Read%20the%20Docs-00d4aa?logo=readthedocs&logoColor=white)](https://xoifaii.github.io/)
+------------------------------------------------------------------------
 
 ## Installation
 
-### Wally
+### Lune Environment
 
-```toml
-[dependencies]
-cryptography = "daily3014/cryptography@3.1.0"
+``` lua
+local Cryptography = require("./module")
 ```
 
-### Pesde
+### Roblox Executor Environment
 
-```yaml
-pesde add daily3014/cryptography
+``` lua
+local Cryptography = loadstring(game:HttpGet("YOUR_MODULE_LINK"))()
 ```
 
-### Manual Installation
+------------------------------------------------------------------------
 
-Download the latest release from GitHub and place it in your Roblox Studio project.
+## Module Access
 
-## List of Algorithms
-
-### Elliptic Curve Cryptography
-
-**Digital Signature Schemes**
-
-- [Ed25519](https://github.com/daily3014/rbx-cryptography/blob/main/src/Verification/EdDSA) signatures with masked operations for side-channel protection
-
-**Key Exchange**
-
-- [X25519](https://github.com/daily3014/rbx-cryptography/blob/main/src/Verification/EdDSA/X25519.luau): Elliptic curve Diffie-Hellman over Curve25519
-
-### Post-Quantum Cryptography
-
-**KEM: Key Encapsulation Methods**
-
-- [ML-KEM](https://github.com/daily3014/rbx-cryptography/tree/main/src/Verification/MlKEM): modes 512, 768, 1024 (Kyber-based, NIST standardized)
-
-**Digital Signature Schemes**
-
-- [ML-DSA](https://github.com/daily3014/rbx-cryptography/tree/main/src/Verification/MlDSA): modes 44, 65, 87 (Dilithium-based, [FIPS 204](https://doi.org/10.6028/NIST.FIPS.204))
-
-### Symmetric Cryptography
-
-**Hash Functions**
-
-- **SHA-2 Family**: SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256 with optional salt support
-- **SHA-3 Family**: SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256 ([FIPS 202](https://doi.org/10.6028/NIST.FIPS.202))
-- **BLAKE Family**: [BLAKE3](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/Blake3.luau) (fastest available), BLAKE3-Keyed, BLAKE3-DeriveKey, [BLAKE2b](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/Blake2b.luau)
-
-**Non-cryptographic Hash Functions**
-
-- [XXH32](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/XXH32.luau): Ultra-fast non-cryptographic hash
-- [Murmur3](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/Murmur.luau): Fast non-cryptographic hash
-
-**Message Authentication**
-
-- [HMAC](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/HMAC.luau): Hash-based Message Authentication Code (works with any hash function)
-
-- [KMAC](https://github.com/daily3014/rbx-cryptography/blob/main/src/Hashing/KMAC.luau): Hash-based Message Authentication Code (uses Keccak)
-
-**Authenticated Encryption**
-
-- [ChaCha20-Poly1305](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/AEAD): AEAD construction ([RFC 8439](https://doi.org/10.17487/RFC8439))
-- [AES-GCM](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/AES.luau): Galois/Counter Mode
-
-**Stream & Block Ciphers**
-
-- [ChaCha20](https://github.com/daily3014/rbx-cryptography/tree/main/src/Encryption/AEAD): Stream cipher ([RFC 8439](https://doi.org/10.17487/RFC8439))
-- [AES-GCM](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/AES.luau): Advanced Encryption Standard
-- [Simon](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/Simon.luau): Lightweight block cipher
-- [Speck](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/Speck.luau): Lightweight block cipher
-- [XOR](https://github.com/daily3014/rbx-cryptography/blob/main/src/Encryption/XOR.luau): Simple additive cipher
-
-**Checksums**
-
-- [CRC32](https://github.com/daily3014/rbx-cryptography/blob/main/src/Checksums/CRC32.luau): Cyclic Redundancy Check (JAM/ISO modes)
-- [Adler-32](https://github.com/daily3014/rbx-cryptography/blob/main/src/Checksums/Adler.luau): Checksum algorithm
-
-### Utilities
-
-**Encoding & Conversion**
-
-- [Base64](https://github.com/daily3014/rbx-cryptography/blob/main/src/Utilities/Base64.luau): Encode and decode
-- [Hexadecimal](https://github.com/daily3014/rbx-cryptography/blob/main/src/Utilities/Conversions.luau): Buffer to/from hex string conversion
-
-**Random Generation**
-
-- [CSPRNG](https://github.com/daily3014/rbx-cryptography/blob/main/src/Utilities/CSPRNG): Cryptographically Secure Pseudo-Random Number Generator with entropy management
-- Random strings and bytes generation
-
-## Performance
-
-Performance benchmarks conducted in Roblox Studio on AMD Ryzen 5 7600X using Benchmarker by @boatbomber.
-
-### Hashing / Checksum
-
-| Algorithm | Data Size | This Library | HashLib | Alternative | Other Libraries | Improvement |
-|-----------|-----------|--------------|---------|-------------|-----------------|-------------|
-| SHA-256 | 20k | **271 μs** | 2058 μs | 493 μs (Old Version) | 596 μs (Dekkonot) | **7.6x faster** than HashLib |
-| SHA-512 | 20k | **421 μs** | 4348 μs | 1066 μs (Dekkonot) | - | **10.3x faster** than HashLib |
-| SHA3-512 | 20k | **826 μs** | 10.60 ms | - | - | **12.8x faster** than HashLib |
-| BLAKE3 | 20k | **133 μs** | - | - | - | - |
-| HMAC-BLAKE3 | 20k | **145 μs** | - | - | - | - |
-| KMAC-128 | 20k | **443 μs** | - | - | - | - |
-| KMAC-256 | 20k | **501 μs** | - | - | - | - |
-| Adler-32 | 200k | **163 μs** | - | 1.65 ms (Naive Approach) | - | **10.1x faster** |
-| CRC32 | 200k | **1.43 ms** | - | 6.26 ms (DevForum) | - | **4.4x faster** |
-
-### Encryption
-
-| Algorithm | Data Size | This Library | Alternative | Other Libraries | Improvement |
-|-----------|-----------|--------------|-------------|-----------------|-------------|
-| ChaCha20 (Encrypt) | 20k | **177 μs** | 7.87 ms (EncryptedNet) | - | **44.5x faster** |
-| ChaCha20 (Roundtrip) | 20k | **338 μs** | ~15 ms (EncryptedNet) | - | **44.4x faster** |
-| ChaCha20-Poly1305 (Encrypt) | 20k | **232 μs** | - | - | - |
-| ChaCha20-Poly1305 (Roundtrip) | 20k | **448 μs** | - | - | - |
-| Simon (Encrypt) | 20k | **239 μs** | - | - | - |
-| Simon (Roundtrip) | 20k | **466 μs** | - | - | - |
-| Speck (Encrypt) | 20k | **193 μs** | - | - | - |
-| Speck (Roundtrip) | 20k | **388 μs** | - | - | - |
-| AES-GCM (Encrypt) | 20k | **833 μs** | 1.877 ms (RobloxGamerPro200007 AES256-CTR) | - | **2.3x faster** |
-| AES-GCM (Roundtrip) | 20k | **1.5 ms** | - | - | - |
-| XOR (Encrypt) | 1 million | **1.10 ms** | ~49.5 ms (Devfourm) | ~171000 ms (daily) | **155,454x faster** |
-| XOR (Roundtrip) | 1 million | **2.20 ms** | 98.9 ms (Devfourm) | ~342000 ms (daily) | **155,454x faster** |
-
-### Digital Signatures & Key Exchange
-
-| Algorithm | Operation | Time | Alternative | Improvement |
-|-----------|-----------|------|-------------|-------------|
-| EdDSA (Roundtrip) | Sign+Verify | **691 μs** | - | - |
-| ML-DSA-44 (Roundtrip) | Sign+Verify | **3.65 ms** | - | - |
-| ML-KEM-512 (Roundtrip) | Encap+Decap | **754 μs** | - | - |
-
-### Utilities
-
-| Algorithm | Data Size | Time | Alternative | Improvement |
-|-----------|-----------|------|-------------|-------------|
-| Base64 (Roundtrip) | 1 million | **3.77ms** | Lute: 9.11ms<br>Reselim: 12.08ms | **2.4x faster** than Lute<br>**3.2x faster** than Reselim |
-
-*Roundtrip: Complete encrypt/decrypt or sign/verify cycle*
-
-## Testing and Benchmarking
-
-### Running Tests
-
-To run the complete test suite:
-
-```bash
-bash scripts/test.sh
+``` lua
+local AES = Cryptography.Encryption.AES
+local CSPRNG = Cryptography.Utils.CSPRNG
+local Conversions = Cryptography.Utils.Conversions
 ```
 
-This will launch Roblox Studio, execute all tests, and display results in your terminal.
+------------------------------------------------------------------------
 
-### Development Testing
+## API Documentation
 
-For continuous testing during development:
+### AES (GCM)
 
-```bash
-bash scripts/dev.sh
+Provides authenticated encryption and decryption using AES-GCM.
+
+#### Encrypt
+
+``` lua
+AES.Encrypt(Plaintext: buffer, Key: buffer, IV: buffer, AAD: buffer?) -> (buffer, buffer)
 ```
 
-This starts a Rojo server. Open Roblox Studio and sync Rojo into a Baseplate. Whenever you run the game server, the test suites will run and results will show in the Output widget.
+**Parameters:** - Plaintext (buffer): Data to encrypt - Key (buffer):
+AES key (16, 24, or 32 bytes) - IV (buffer): Initialization Vector
+(recommended: 12 bytes) - AAD (buffer, optional): Additional
+Authenticated Data
 
-## Contributing
+**Returns:** - Ciphertext (buffer) - Authentication Tag (buffer)
 
-To contribute, fork this repository and make your changes, and then make a Pull Request. A Pull Request needs approval.
+------------------------------------------------------------------------
 
-Please read the [CONTRIBUTING.md file](CONTRIBUTING.md) for detailed guidelines.
+#### Decrypt
 
-## License
+``` lua
+AES.Decrypt(Ciphertext: buffer, Key: buffer, IV: buffer, Tag: buffer, AAD: buffer?) -> (boolean, buffer?)
+```
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+**Returns:** - Success (boolean): Indicates if authentication passed -
+Decrypted (buffer?): Decrypted data (only if successful)
 
----
+------------------------------------------------------------------------
 
-<div align="center">
+### Conversions
 
-[DevForum](https://devforum.roblox.com/t/fastest-cryptography-library-for-roblox/3680271) • [Discord](https://discord.gg/Fg3sM8qKPp) • [Docs](https://xoifaii.github.io/) • [Wally](https://wally.run/package/daily3014/cryptography) • [Pesde](https://pesde.dev/packages/daily3014/cryptography)
+Utility functions for buffer and hexadecimal conversions.
 
+``` lua
+Conversions.ToHex(Buffer: buffer) -> string
+Conversions.FromHex(Hex: string | buffer) -> buffer
+```
 
-</div>
+------------------------------------------------------------------------
 
+### CSPRNG (Cryptographically Secure Random)
 
+Secure random generation utilities.
+
+``` lua
+CSPRNG.Random() -> number
+CSPRNG.RandomInt(Min: number, Max: number?) -> number
+CSPRNG.RandomNumber(Min: number, Max: number?) -> number
+CSPRNG.RandomBytes(Count: number) -> buffer
+CSPRNG.RandomString(Length: number, AsBuffer: boolean?) -> string | buffer
+CSPRNG.RandomHex(Length: number) -> string
+CSPRNG.Ed25519ClampedBytes(Input: buffer) -> buffer
+CSPRNG.Ed25519Random() -> buffer
+```
+
+------------------------------------------------------------------------
+
+## Full Usage Example
+
+``` lua
+--local Cryptography = require("./module") -- (for lune environment)
+local Cryptography = loadstring(game:HttpGet("https://github.com"))() -- (for roblox executor environment)
+
+local AES = Cryptography.Encryption.AES
+local CSPRNG = Cryptography.Utils.CSPRNG
+local Conversions = Cryptography.Utils.Conversions
+
+local Key = CSPRNG.RandomBytes(32) -- 16, 24, or 32 bytes
+local IV = CSPRNG.RandomBytes(12) -- required value (recommended for GCM)
+
+local Message = "This is a secret message"
+local Plaintext = buffer.fromstring(Message)
+
+-- Optional Additional Authenticated Data (AAD)
+local AAD = buffer.fromstring("user:john,timestamp:456745683")
+
+local Encrypted, Tag = AES.Encrypt(Plaintext, Key, IV, AAD)
+local Success, Decrypted = AES.Decrypt(Encrypted, Key, IV, Tag, AAD)
+
+if Success then
+    print("Show key:", Key) -- type: buffer
+    print("Show Encrypted:", Encrypted) -- type: buffer
+    print("Show Tag:", Tag) -- type: buffer
+
+    print("Show Key in hex:", Conversions.ToHex(Key)) -- type: string (hex)
+    print("Show Encrypted in hex:", Conversions.ToHex(Encrypted)) -- type: string (hex)
+    print("Show Tag in hex:", Conversions.ToHex(Tag)) -- type: string (hex)
+
+    print("Show Decrypted:", Decrypted) -- type: buffer
+    print("Show Decrypted in string:", buffer.tostring(Decrypted)) -- type: string
+end
+```
+
+------------------------------------------------------------------------
+
+## Notes
+
+-   Always use a unique IV for each encryption.
+-   Never reuse the same Key + IV combination.
+-   Recommended IV size for AES-GCM is 12 bytes.
+-   This module is intended for scripting convenience, not
+    enterprise-grade security.
