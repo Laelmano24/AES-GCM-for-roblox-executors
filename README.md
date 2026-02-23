@@ -25,7 +25,7 @@ into a single, lightweight module that can be easily used in:
 
 ------------------------------------------------------------------------
 
-## utilization
+## Utilization
 
 ### Lune Environment
 
