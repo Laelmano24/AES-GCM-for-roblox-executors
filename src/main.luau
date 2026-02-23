@@ -1,5 +1,5 @@
---local Cryptography = require("./module") --(for lune environment)
-local Cryptography = loadstring(game:HttpGet("https://github.com"))() -- (for roblox executor environment)
+local Cryptography = require("./module") --(for lune environment)
+--local Cryptography = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/AES-GCM-for-roblox-executors/refs/heads/main/dist/loader.luau"))() -- (for roblox executor environment)
 
 local AES = Cryptography.Encryption.AES
 local CSPRNG = Cryptography.Utils.CSPRNG

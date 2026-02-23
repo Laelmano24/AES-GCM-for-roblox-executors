@@ -25,7 +25,7 @@ into a single, lightweight module that can be easily used in:
 
 ------------------------------------------------------------------------
 
-## Installation
+## utilization
 
 ### Lune Environment
 
@@ -36,7 +36,7 @@ local Cryptography = require("./module")
 ### Roblox Executor Environment
 
 ``` lua
-local Cryptography = loadstring(game:HttpGet("YOUR_MODULE_LINK"))()
+local Cryptography = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/AES-GCM-for-roblox-executors/refs/heads/main/dist/loader.luau"))()
 ```
 
 ------------------------------------------------------------------------
@@ -115,7 +115,7 @@ CSPRNG.Ed25519Random() -> buffer
 
 ``` lua
 --local Cryptography = require("./module") -- (for lune environment)
-local Cryptography = loadstring(game:HttpGet("https://github.com"))() -- (for roblox executor environment)
+local Cryptography = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/AES-GCM-for-roblox-executors/refs/heads/main/dist/loader.luau"))() -- (for roblox executor environment)
 
 local AES = Cryptography.Encryption.AES
 local CSPRNG = Cryptography.Utils.CSPRNG
